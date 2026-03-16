@@ -7,22 +7,23 @@
 <style>
 
 body{
-font-family: Arial;
+font-family:Arial, Helvetica, sans-serif;
 margin:0;
 background:#f4f6f8;
 color:#333;
+line-height:1.6;
 }
 
 header{
 background:#1f2937;
 color:white;
-padding:60px 20px;
+padding:80px 20px;
 text-align:center;
 }
 
 header h1{
+font-size:42px;
 margin:0;
-font-size:36px;
 }
 
 header p{
@@ -48,44 +49,67 @@ nav a:hover{
 text-decoration:underline;
 }
 
-section{
+main{
 max-width:900px;
 margin:auto;
 padding:40px;
 }
 
+section{
+margin-bottom:60px;
+}
+
 .card{
 background:white;
 padding:25px;
-margin:25px 0;
+margin-top:20px;
 border-radius:8px;
 box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-.card h3{
-margin-top:0;
-}
-
-button{
+.button{
+display:inline-block;
 background:#2563eb;
 color:white;
-border:none;
 padding:10px 16px;
 border-radius:6px;
-cursor:pointer;
+text-decoration:none;
 margin-top:10px;
 }
 
-button:hover{
+.button:hover{
 background:#1d4ed8;
+}
+
+.skills{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
+
+.skill{
+background:#e5e7eb;
+padding:8px 12px;
+border-radius:6px;
+font-size:14px;
 }
 
 footer{
 background:#1f2937;
 color:white;
 text-align:center;
-padding:25px;
-margin-top:40px;
+padding:30px;
+}
+
+footer a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+}
+
+footer a:hover{
+text-decoration:underline;
 }
 
 </style>
@@ -97,28 +121,55 @@ margin-top:40px;
 <header>
 
 <h1>Abraham Noroozian</h1>
-<p>Data Analytics | Reporting | SQL | Excel | Data Tools</p>
+
+<p>Data Analytics • Reporting • SQL • Excel • Data Quality • Data Tools</p>
 
 </header>
 
 <nav>
 
-<a href="#">Home</a>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
 <a href="#projects">Projects</a>
 <a href="#tools">Tools</a>
+<a href="#contact">Contact</a>
 
 </nav>
 
-<section>
+<main>
+
+<section id="about">
 
 <h2>About</h2>
 
 <p>
-Data-focused professional with experience in reporting, analytics, and education.  
-I work with SQL and Excel to analyse datasets, build dashboards, and improve data quality.
+Data professional focused on reporting, analytics and data quality.
+I work with SQL and Excel to transform datasets into meaningful insights that support better decision-making.
+My background in education and analytics enables me to communicate complex data clearly and develop practical tools.
 </p>
 
 </section>
+
+
+<section id="skills">
+
+<h2>Technical Skills</h2>
+
+<div class="skills">
+
+<span class="skill">SQL</span>
+<span class="skill">Excel</span>
+<span class="skill">Data Analysis</span>
+<span class="skill">Reporting</span>
+<span class="skill">Data Quality</span>
+<span class="skill">Dashboards</span>
+<span class="skill">Data Validation</span>
+<span class="skill">Automation</span>
+
+</div>
+
+</section>
+
 
 <section id="projects">
 
@@ -128,33 +179,42 @@ I work with SQL and Excel to analyse datasets, build dashboards, and improve dat
 
 <h3>Student Cohort Analysis (SQL)</h3>
 
-<p>Analysis of student completion patterns using SQL queries and cohort segmentation.</p>
+<p>
+Analysis of student completion trends using SQL queries and cohort segmentation to identify engagement and completion patterns.
+</p>
 
-<button>View Project</button>
+<a class="button" href="sql-project.html">View Project</a>
 
 </div>
+
 
 <div class="card">
 
 <h3>Attendance Reporting Dashboard (Excel)</h3>
 
-<p>Interactive Excel dashboard analysing attendance trends and engagement.</p>
+<p>
+Interactive Excel dashboard analysing attendance trends, engagement indicators and reporting metrics.
+</p>
 
-<button>View Project</button>
+<a class="button" href="#">View Project</a>
 
 </div>
+
 
 <div class="card">
 
 <h3>Data Quality Validation</h3>
 
-<p>Data validation process to identify missing values and inconsistencies in datasets.</p>
+<p>
+Data validation process designed to identify inconsistencies, missing values and quality issues within datasets.
+</p>
 
-<button>View Project</button>
+<a class="button" href="#">View Project</a>
 
 </div>
 
 </section>
+
 
 <section id="tools">
 
@@ -164,30 +224,55 @@ I work with SQL and Excel to analyse datasets, build dashboards, and improve dat
 
 <h3>Word Search Generator</h3>
 
-<p>Web tool for generating vocabulary puzzles.</p>
+<p>
+Interactive tool for generating vocabulary puzzles and language learning activities.
+</p>
 
-<button>Open Tool</button>
+<a class="button" href="wordsearch.html">Open Tool</a>
 
 </div>
 
+
 <div class="card">
 
-<h3>Vocabulary Tool</h3>
+<h3>Vocabulary Practice Tool</h3>
 
-<p>Interactive vocabulary practice generator.</p>
+<p>
+Web-based tool for creating vocabulary practice exercises.
+</p>
 
-<button>Open Tool</button>
+<a class="button" href="#">Open Tool</a>
 
 </div>
 
 </section>
 
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<p>
+If you would like to collaborate or discuss opportunities, feel free to connect.
+</p>
+
+<p>
+
+<a href="https://github.com/abrahamnoroozian" target="_blank">GitHub</a> |
+<a href="https://linkedin.com" target="_blank">LinkedIn</a>
+
+</p>
+
+</section>
+
+</main>
+
 <footer>
 
 <p>© 2026 Abraham Noroozian</p>
-<p>LinkedIn | GitHub</p>
 
 </footer>
 
 </body>
+
 </html>
