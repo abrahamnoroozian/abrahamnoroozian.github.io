@@ -8,9 +8,10 @@
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 background:#f4f6f8;
 margin:40px;
+line-height:1.6;
 }
 
 .container{
@@ -26,9 +27,40 @@ h1{
 margin-top:0;
 }
 
-code{
-background:#eee;
-padding:4px 6px;
+table{
+border-collapse:collapse;
+width:100%;
+margin-top:15px;
+}
+
+th, td{
+border:1px solid #ddd;
+padding:8px;
+text-align:left;
+}
+
+th{
+background:#f2f2f2;
+}
+
+pre{
+background:#f4f4f4;
+padding:15px;
+overflow-x:auto;
+}
+
+.button{
+display:inline-block;
+background:#2563eb;
+color:white;
+padding:10px 16px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.button:hover{
+background:#1d4ed8;
 }
 
 </style>
@@ -43,47 +75,153 @@ padding:4px 6px;
 
 <p><strong>Tools:</strong> SQL, Excel</p>
 
-<h2>Project Overview</h2>
+
+<h2>1. Business Problem</h2>
 
 <p>
-This project analyses student attendance and completion patterns to identify engagement trends and potential risk indicators.
-SQL queries were used to analyse attendance patterns and student outcomes.
+Educational institutions often struggle to identify students who may be at risk of failing or dropping out. 
+Attendance is frequently one of the earliest indicators of student engagement. 
+This project explores whether attendance levels can help predict student completion outcomes and how reporting insights can help instructors intervene earlier.
 </p>
 
-<h2>Dataset Structure</h2>
+
+<h2>2. Dataset Description</h2>
+
+<p>
+The dataset contains attendance and performance records collected across multiple teaching sessions. 
+Each session includes multiple classes with approximately 15–20 students per class.
+</p>
+
+<p><strong>Estimated dataset size:</strong></p>
 
 <ul>
-<li>Student ID</li>
-<li>Course</li>
-<li>Attendance Percentage</li>
-<li>Assessment Score</li>
-<li>Completion Status</li>
+<li>Sessions per year: 13</li>
+<li>Classes per session: 2</li>
+<li>Average students per class: 18</li>
+<li>Students per year: ~468</li>
+<li>Total dataset analysed: ~1400 student records (3 academic years)</li>
 </ul>
 
-<h2>Example SQL Query</h2>
+
+<h3>Dataset Fields</h3>
+
+<ul>
+<li>student_id</li>
+<li>session</li>
+<li>course</li>
+<li>attendance_percentage</li>
+<li>assessment_score</li>
+<li>completion_status</li>
+</ul>
+
+
+<h3>Sample Dataset</h3>
+
+<table>
+
+<tr>
+<th>Student ID</th>
+<th>Session</th>
+<th>Course</th>
+<th>Attendance %</th>
+<th>Score</th>
+<th>Status</th>
+</tr>
+
+<tr><td>1001</td><td>S1</td><td>Academic English</td><td>92</td><td>85</td><td>Completed</td></tr>
+<tr><td>1002</td><td>S1</td><td>Academic English</td><td>68</td><td>62</td><td>Not Completed</td></tr>
+<tr><td>1003</td><td>S1</td><td>Academic English</td><td>88</td><td>79</td><td>Completed</td></tr>
+<tr><td>1004</td><td>S2</td><td>Academic English</td><td>74</td><td>70</td><td>Completed</td></tr>
+<tr><td>1005</td><td>S2</td><td>Academic English</td><td>55</td><td>48</td><td>Not Completed</td></tr>
+
+</table>
+
+
+<h2>3. SQL Analysis</h2>
+
+<h3>Average Attendance and Performance by Course</h3>
 
 <pre>
-
 SELECT
 course,
-AVG(attendance) AS avg_attendance,
-AVG(score) AS avg_score
-FROM students
-GROUP BY course;
-
+COUNT(student_id) AS total_students,
+ROUND(AVG(attendance_percentage),2) AS avg_attendance,
+ROUND(AVG(assessment_score),2) AS avg_score
+FROM student_performance
+GROUP BY course
+ORDER BY avg_score DESC;
 </pre>
 
-<h2>Key Insights</h2>
+
+<h3>Identify At-Risk Students</h3>
+
+<pre>
+SELECT
+student_id,
+session,
+course,
+attendance_percentage,
+assessment_score
+FROM student_performance
+WHERE attendance_percentage < 70
+ORDER BY attendance_percentage ASC;
+</pre>
+
+
+<h3>Completion Rate by Attendance Band</h3>
+
+<pre>
+SELECT
+CASE
+WHEN attendance_percentage >= 90 THEN '90–100%'
+WHEN attendance_percentage >= 80 THEN '80–89%'
+WHEN attendance_percentage >= 70 THEN '70–79%'
+ELSE 'Below 70%'
+END AS attendance_band,
+COUNT(*) AS students,
+AVG(CASE WHEN completion_status = 'Completed' THEN 1 ELSE 0 END)*100 AS completion_rate
+FROM student_performance
+GROUP BY attendance_band
+ORDER BY attendance_band DESC;
+</pre>
+
+
+<h2>4. Key Insights</h2>
 
 <ul>
 
-<li>Students with attendance above 85% show significantly higher completion rates.</li>
+<li>Students with attendance above 85% show the highest completion rates.</li>
 
-<li>Attendance below 70% is associated with increased risk of non-completion.</li>
+<li>Attendance below 70% strongly correlates with course non-completion.</li>
 
-<li>Early monitoring of attendance can help identify students needing support.</li>
+<li>Early attendance monitoring can help identify students requiring additional academic support.</li>
+
+<li>Session-level reporting enables instructors and administrators to track engagement trends across multiple terms.</li>
 
 </ul>
+
+
+<h2>5. Reporting Dashboard</h2>
+
+<p>
+The analysis results were summarised in an Excel reporting dashboard designed to support operational monitoring of student engagement.
+</p>
+
+<p>The dashboard includes:</p>
+
+<ul>
+<li>Attendance distribution across sessions</li>
+<li>Course completion rate overview</li>
+<li>Average assessment score by attendance level</li>
+<li>Identification of students at risk of non-completion</li>
+</ul>
+
+
+<p style="margin-top:30px;">
+
+<a href="index.html" class="button">← Back to Portfolio</a>
+
+</p>
 
 </div>
 
